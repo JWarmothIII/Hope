@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sartre, Freedom, Bad Faith, and Hope</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --uwp-blue: #1A64B7;
+      --uwp-orange: #F58113;
+      --bg-light: #f5f5f7;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #ffffff 0, #eef3fb 40%, #dde3f2 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    header {
+      background: var(--uwp-blue);
+      color: #ffffff;
+      padding: 1.75rem 1.5rem;
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2rem;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -10px;
+      height: 6px;
+      background: linear-gradient(90deg, var(--uwp-orange), #ffc46a);
+    }
+
+    header h1 {
+      margin: 0 0 0.4rem;
+      font-size: clamp(1.7rem, 2vw + 1rem, 2.25rem);
+      letter-spacing: 0.03em;
+    }
+
+    header h2 {
+      margin: 0.15rem 0 0.75rem;
+      font-weight: 500;
+      font-size: 1rem;
+      color: #e1ecff;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #d5e2ff;
+    }
+
+    .question-block {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.25rem 1.25rem 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border-left: 5px solid var(--uwp-orange);
+      margin-bottom: 2rem;
+    }
+
+    .question-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      color: var(--uwp-orange);
+      margin-bottom: 0.35rem;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    details.accordion {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 14px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(26, 100, 183, 0.15);
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    details.accordion[open] {
+      border-color: var(--uwp-orange);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+      transform: translateY(-1px);
+    }
+
+    details.accordion summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.9rem 1rem 0.9rem 1.1rem;
+      background: linear-gradient(90deg, var(--uwp-blue), #17539a);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      position: relative;
+      user-select: none;
+    }
+
+    details.accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.accordion summary::before {
+      content: "";
+      width: 4px;
+      align-self: stretch;
+      background: linear-gradient(180deg, var(--uwp-orange), #ffd19a);
+      border-radius: 999px;
+      margin-right: 0.1rem;
+    }
+
+    details.accordion summary::after {
+      content: "+";
+      margin-left: auto;
+      font-size: 1.25rem;
+      line-height: 1;
+      font-weight: 500;
+      transition: transform 0.15s ease, color 0.15s ease;
+      color: #ffebce;
+    }
+
+    details.accordion[open] summary::after {
+      content: "–";
+      transform: translateY(-1px);
+      color: #ffffff;
+    }
+
+    details.accordion summary:hover {
+      background: linear-gradient(
+        90deg,
+        var(--uwp-blue),
+        #1f70c9
+      );
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    details.accordion .content {
+      padding: 0.85rem 1.25rem 1rem 1.4rem;
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      background: #ffffff;
+    }
+
+    details.accordion .content p {
+      margin-top: 0;
+    }
+
+    details.accordion .content ul {
+      margin: 0.35rem 0 0.15rem 1.1rem;
+      padding: 0;
+    }
+
+    details.accordion .content li {
+      margin-bottom: 0.25rem;
+    }
+
+    blockquote {
+      margin: 0.4rem 0 0;
+      padding-left: 0.9rem;
+      border-left: 3px solid rgba(26, 100, 183, 0.35);
+      font-style: italic;
+      color: #444b5a;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      text-align: center;
+      color: #6b6b6b;
+    }
+
+    footer span {
+      color: var(--uwp-orange);
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding-top: 3rem;
+      }
+
+      header {
+        padding: 2rem 2.25rem;
+      }
+
+      .question-block {
+        padding: 1.4rem 1.5rem 1.15rem;
+      }
+
+      details.accordion .content {
+        padding-left: 1.7rem;
+        padding-right: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Sartre, Freedom, Bad Faith, and Hope</h1>
+      <h2>Organized Notes &amp; Reflections</h2>
+      <p>
+        Exploring how freedom, anguish, bad faith, and hope interlock in Sartre’s
+        existentialism.
+      </p>
+    </header>
+
+    <section class="question-block">
+      <div class="question-label">Guiding Question</div>
+      <div class="question-text">Is hope anguish?</div>
+    </section>
+
+    <section class="accordion-list">
+
+      <!-- 1. Starting Thoughts and Statements -->
+      <details class="accordion">
+        <summary>1. Starting Thoughts and Statements</summary>
+        <div class="content">
+          <ul>
+            <li>Life is weird, absurd, and filled with the anguish of existence.</li>
+            <li>We are condemned to be free.</li>
+            <li>Freedom generates both possibility and anxiety.</li>
+            <li>
+              Hope and freedom are mutually sustaining:
+              <ul>
+                <li>Hope gives rise to freedom, because one must believe in possibility to act.</li>
+                <li>Freedom gives rise to hope, because one must be able to choose and imagine otherwise.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 2. Bad Faith and Inauthenticity -->
+      <details class="accordion">
+        <summary>2. Bad Faith and Inauthenticity</summary>
+        <div class="content">
+          <ul>
+            <li>
+              Bad faith: allowing an identity, role, system, or expectation to define you as a fixed thing.
+              <ul>
+                <li>Example: the waiter who becomes the role instead of a person who works as a waiter.</li>
+              </ul>
+            </li>
+            <li>
+              Bad faith is:
+              <ul>
+                <li>denying your ongoing potentiality,</li>
+                <li>pretending your identity is completed, finished, and unchangeable,</li>
+                <li>holding onto specific attributes as if no decisions remain.</li>
+              </ul>
+            </li>
+            <li>
+              Bad faith is comforting because:
+              <ul>
+                <li>it is a leap of faith that assumes no change will occur,</li>
+                <li>it relieves responsibility: “I am this”,</li>
+                <li>it avoids anguish by reducing uncertainty.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 3. Capitalism, Necessity, and the Collapse of Hope -->
+      <details class="accordion">
+        <summary>3. Capitalism, Necessity, and the Collapse of Hope</summary>
+        <div class="content">
+          <ul>
+            <li>
+              Capitalism suggests:
+              <ul>
+                <li>that everything is necessary and inevitable,</li>
+                <li>that roles are fixed and futures are predetermined.</li>
+              </ul>
+            </li>
+            <li>
+              When hope collapses, freedom collapses with it:
+              <ul>
+                <li>hope is replaced by necessity,</li>
+                <li>potential is replaced by a false identity.</li>
+              </ul>
+            </li>
+          </ul>
+          <blockquote>
+            “Things aren’t what they seem. We are full of potential.” Bad faith acts as if potential isn’t real.
+          </blockquote>
+        </div>
+      </details>
+
+      <!-- 4. Hope: Simultaneous Freedom and Anguish -->
+      <details class="accordion">
+        <summary>4. Hope: Simultaneous Freedom and Anguish</summary>
+        <div class="content">
+          <ul>
+            <li>Hope is both freedom and anguish.</li>
+            <li>
+              Hope can:
+              <ul>
+                <li>lock you into bad faith if you cling to a single desired outcome,</li>
+                <li>liberate you if it remains dynamic, open, and continual.</li>
+              </ul>
+            </li>
+            <li>Hope is risk.</li>
+            <li>We are always able to undo hopes, revise them, or abandon them.</li>
+            <li>No one and nothing requires us to hope for a “good life.”</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 5. Nothingness and Becoming -->
+      <details class="accordion">
+        <summary>5. Nothingness and Becoming</summary>
+        <div class="content">
+          <ul>
+            <li>Sartre: “Being-for-itself” is not completed, always in process.</li>
+            <li>
+              Nothingness allows:
+              <ul>
+                <li>reinvention,</li>
+                <li>responsibility,</li>
+                <li>self-destruction,</li>
+                <li>transformation.</li>
+              </ul>
+            </li>
+            <li>
+              Hope functions within nothingness:
+              <ul>
+                <li>Hope imagines a future self that does not yet exist.</li>
+                <li>Hope acknowledges that we are unfinished.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 6. Hope, Growth, and Self-Consciousness -->
+      <details class="accordion">
+        <summary>6. Hope, Growth, and Self-Consciousness</summary>
+        <div class="content">
+          <ul>
+            <li>Growth is only possible if hope persists.</li>
+            <li>
+              Example:
+              <ul>
+                <li>hoping to be accepted as a speaker produces anguish while waiting,</li>
+                <li>but that hope makes learning, preparing, and growth possible,</li>
+                <li>even if the hope fails, it births new hope.</li>
+              </ul>
+            </li>
+            <li>We hope others see us positively, so we behave toward that projection.</li>
+            <li>When others view us poorly, shame generates newly formed hope to transform.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 7. Self-Destruction and Freedom -->
+      <details class="accordion">
+        <summary>7. Self-Destruction and Freedom</summary>
+        <div class="content">
+          <ul>
+            <li>We are free even to engage in self-destructive acts.</li>
+            <li>Hope does not guarantee positive outcomes.</li>
+            <li>Hope requires action to realize its imagined futures.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 8. My Final Position -->
+      <details class="accordion">
+        <summary>8. My Final Position</summary>
+        <div class="content">
+          <ul>
+            <li>Sartre seems to accept anguish, avoid bad faith, and acknowledge complete freedom.</li>
+            <li>
+              My thoughts:
+              <ul>
+                <li>Hope is the antidote to bad faith.</li>
+                <li>To avoid becoming a static thing, one must maintain and renew hope.</li>
+                <li>Hope keeps the self open, dynamic, and capable of growth.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>My thesis statement:</p>
+          <blockquote>
+            We are condemned to be free and, in that same way, condemned to hope.
+            Hope is not merely optimism but the ongoing refusal to be finished, fixed, or complete.
+          </blockquote>
+        </div>
+      </details>
+
+      <!-- 9. Distilled Thoughts -->
+      <details class="accordion">
+        <summary>9. Distilled Thoughts</summary>
+        <div class="content">
+          <ul>
+            <li>We are condemned to be free.</li>
+            <li>We are condemned to be hopeful.</li>
+            <li>Hope is our ongoing negotiation with nothingness.</li>
+            <li>Hope keeps us from becoming a thing.</li>
+            <li>To hope is to accept anguish, possibility, and growth.</li>
+          </ul>
+        </div>
+      </details>
+
+    </section>
+
+    <footer>
+      <span>◆</span> Sartre, Freedom, Bad Faith, and Hope · Notes for study and reflection
+    </footer>
+  </main>
+</body>
+</html>
