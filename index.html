@@ -1,552 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Sartre, Freedom, Bad Faith, and Hope</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --uwp-blue: #1A64B7;
-      --uwp-orange: #F58113;
-      --bg-light: #f5f5f7;
-      --text-main: #222222;
-      --text-muted: #555555;
-      --card-bg: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: radial-gradient(circle at top, #ffffff 0, #eef3fb 40%, #dde3f2 100%);
-      color: var(--text-main);
-      line-height: 1.6;
-    }
-
-    .page {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2.5rem 1.25rem 3rem;
-    }
-
-    header {
-      background: var(--uwp-blue);
-      color: #ffffff;
-      padding: 1.75rem 1.5rem;
-      border-radius: 18px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
-      margin-bottom: 2rem;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      inset: auto -40px -10px;
-      height: 6px;
-      background: linear-gradient(90deg, var(--uwp-orange), #ffc46a);
-    }
-
-    header h1 {
-      margin: 0 0 0.4rem;
-      font-size: clamp(1.7rem, 2vw + 1rem, 2.25rem);
-      letter-spacing: 0.03em;
-    }
-
-    header h2 {
-      margin: 0.15rem 0 0.75rem;
-      font-weight: 500;
-      font-size: 1rem;
-      color: #e1ecff;
-    }
-
-    header p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #d5e2ff;
-    }
-
-    .question-block {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 1.25rem 1.25rem 1rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      border-left: 5px solid var(--uwp-orange);
-      margin-bottom: 2rem;
-    }
-
-    .question-label {
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      font-weight: 600;
-      color: var(--uwp-orange);
-      margin-bottom: 0.35rem;
-    }
-
-    .question-text {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .accordion-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    details.accordion {
-      background: rgba(255, 255, 255, 0.96);
-      border-radius: 14px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(26, 100, 183, 0.15);
-      overflow: hidden;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    }
-
-    details.accordion[open] {
-      border-color: var(--uwp-orange);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
-      transform: translateY(-1px);
-    }
-
-    details.accordion summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 0.9rem 1rem 0.9rem 1.1rem;
-      background: linear-gradient(90deg, var(--uwp-blue), #17539a);
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.98rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      position: relative;
-      user-select: none;
-    }
-
-    details.accordion summary::-webkit-details-marker {
-      display: none;
-    }
-
-    details.accordion summary::before {
-      content: "";
-      width: 4px;
-      align-self: stretch;
-      background: linear-gradient(180deg, var(--uwp-orange), #ffd19a);
-      border-radius: 999px;
-      margin-right: 0.1rem;
-    }
-
-    details.accordion summary::after {
-      content: "+";
-      margin-left: auto;
-      font-size: 1.25rem;
-      line-height: 1;
-      font-weight: 500;
-      transition: transform 0.15s ease, color 0.15s ease;
-      color: #ffebce;
-    }
-
-    details.accordion[open] summary::after {
-      content: "–";
-      transform: translateY(-1px);
-      color: #ffffff;
-    }
-
-    details.accordion summary:hover {
-      background: linear-gradient(
-        90deg,
-        var(--uwp-blue),
-        #1f70c9
-      );
-      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
-    }
-
-    details.accordion .content {
-      padding: 0.85rem 1.25rem 1rem 1.4rem;
-      font-size: 0.96rem;
-      color: var(--text-muted);
-      background: #ffffff;
-    }
-
-    details.accordion .content p {
-      margin-top: 0;
-    }
-
-    details.accordion .content ul {
-      margin: 0.35rem 0 0.15rem 1.1rem;
-      padding: 0;
-    }
-
-    details.accordion .content li {
-      margin-bottom: 0.25rem;
-    }
-
-    blockquote {
-      margin: 0.4rem 0 0;
-      padding-left: 0.9rem;
-      border-left: 3px solid rgba(26, 100, 183, 0.35);
-      font-style: italic;
-      color: #444b5a;
-    }
-
-    footer {
-      margin-top: 2.5rem;
-      font-size: 0.75rem;
-      text-align: center;
-      color: #6b6b6b;
-    }
-
-    footer span {
-      color: var(--uwp-orange);
-    }
-
-    @media (min-width: 768px) {
-      .page {
-        padding-top: 3rem;
-      }
-
-      header {
-        padding: 2rem 2.25rem;
-      }
-
-      .question-block {
-        padding: 1.4rem 1.5rem 1.15rem;
-      }
-
-      details.accordion .content {
-        padding-left: 1.7rem;
-        padding-right: 1.7rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>GitLab Team Dashboard Pitch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <main class="page">
-    <header>
-      <h1>Sartre, Freedom, Bad Faith, and Hope</h1>
-      <h2>Organized Notes &amp; Reflections</h2>
-      <p>
-        Exploring how hope, freedom, anguish, and bad faith intertwine.
-      </p>
+
+<body class="bg-slate-100 text-slate-900">
+<div id="app">
+    <header class="bg-gradient-to-br from-blue-700 to-blue-950 text-white border-b-8 border-orange-500">
+        <div class="max-w-6xl mx-auto px-6 py-14">
+            <span class="inline-block bg-orange-500 px-4 py-2 rounded-full font-bold mb-4">
+                Project Pitch
+            </span>
+
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">{{ projectTitle }}</h1>
+
+            <p class="text-xl max-w-3xl mb-6">{{ tagline }}</p>
+        </div>
     </header>
 
-    <section class="question-block">
-      <div class="question-label">Guiding Question</div>
-      <div class="question-text">Is hope anguish?</div>
-    </section>
+    <main class="max-w-6xl mx-auto p-6 space-y-6">
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-3">What is this project?</h2>
+            <p class="mb-3">
+                This project is a simple dashboard that connects to GitLab and shows useful project
+                information in one place. Instead of clicking through multiple GitLab pages, a team could
+                quickly see what work is open, what work is finished, how much progress has been made,
+                and how the team is doing overall.
+            </p>
+            <p class="font-semibold text-blue-700">
+                The goal is to learn GitLab and APIs while building a tool that that tracks the very project being used to create it.
+            </p>
+        </section>
 
-    <section class="accordion-list">
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-3">What is the GitLab API?</h2>
+            <p class="mb-3">
+                An API is a way for one program to ask another program for information. In this project,
+                our app would ask GitLab for data such as issues, milestones, labels, users, and completed work.
+            </p>
+            <p>
+                For example, instead of a person manually counting closed issues, the app could ask GitLab:
+                “Which issues are closed for this milestone?” Then the app could calculate and display the answer.
+            </p>
+        </section>
 
-      <!-- 1. Starting Thoughts and Statements -->
-      <details class="accordion">
-        <summary>1. Starting Thoughts and Statements</summary>
-        <div class="content">
-          <ul>
-            <li>Life is weird, absurd, and filled with the anguish of existence.</li>
-            <li>
-              We are condemned to be free; freedom is unavoidable and carries responsibility.
-              <blockquote>
-                “I am condemned to be free.” (Sartre, 1956, p. 439)
-              </blockquote>
-              <blockquote>
-                “... condemned, because he did not create himself, yet nonetheless free, because once cast into the world, he is responsible for everything he does.” (Sartre, 2007, p. 29)
-              </blockquote>
-            </li>
-            <li>
-              Freedom generates both possibility and anxiety, because I must choose without guarantees. (Sartre, 2007, p. 25) 
-            </li>
-            <li>
-              Hope and freedom are mutually sustaining:
-              <ul>
-                <li>
-                  Hope gives rise to freedom, because one must believe in possibility to act.
-                </li>
-                <li>
-                  Freedom gives rise to hope, because one must be able to choose and imagine otherwise.
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </details>
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-4">Interactive Demo Concept</h2>
 
-      <!-- 2. Bad Faith and Inauthenticity -->
-      <details class="accordion">
-        <summary>2. Bad Faith and Inauthenticity</summary>
-        <div class="content">
-          <ul>
-            <li>
-              Bad faith: allowing an identity, role, system, or expectation to define you as a fixed thing.
-              <ul>
-                <li>
-                  Example: the waiter who becomes the role instead of a person who works as a waiter.
-                  <blockquote>
-                    “I can not be he. I can only play at being him. I affect him with nothingness.” (Sartre, 1956, p. 121)
-                  </blockquote>
-                  <blockquote>
-                    “Their condition is wholly one of ceremony.” (Sartre, 1956, p. 121)
-                  </blockquote>
-                  <blockquote>
-                    “I am a waiter in the mode of being what I am not.” (Sartre, 1956, p. 61)
-                  </blockquote>
-                </li>
-              </ul>
-            </li>
-            <li>
-              Bad faith is:
-              <ul>
-                <li>denying your ongoing potentiality,</li>
-                <li>pretending your identity is completed, finished, and unchangeable,</li>
-                <li>holding onto specific attributes as if no decisions remain. (Lenzi, 2025, p.203)</li>
-              </ul>
-            </li>
-            <li>
-              Bad faith is comforting because:
-              <ul>
-                <li>it is a leap of faith that assumes no change will occur,</li>
-                <li>it relieves responsibility: “I am this”,</li>
-                <li>
-                  it avoids anguish by reducing uncertainty.
-                  <blockquote>
-                    “The only way to evade that disturbing thought is through some kind of bad faith.” (Sartre, 2007, p. 25)
-                  </blockquote>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </details>
+            <button
+                class="mb-4 bg-blue-700 text-white px-5 py-3 rounded-full font-bold hover:bg-orange-500 transition"
+                @click="demoMode = !demoMode"
+            >
+                {{ demoMode ? "Pause Demo Mode" : "Start Demo Mode" }}
+            </button>
 
-      <!-- 3. Capitalism, Necessity, and the Collapse of Hope -->
-      <details class="accordion">
-        <summary>3. Capitalism, Necessity, and the Collapse of Hope</summary>
-        <div class="content">
-          <ul>
-            <li>
-              Capitalism suggests:
-              <ul>
-                <li>that everything is necessary and inevitable,</li>
-                <li>that roles are fixed and futures are predetermined.</li>
-              </ul>
-            </li>
-            <li>
-              When hope collapses, freedom collapses with it:
-              <ul>
-                <li>hope is replaced by necessity,</li>
-                <li>potential is replaced by a false identity.</li>
-                <li> Things are not what they seem. We are full of potential. Bad faith acts as if potential is not real.</li>
-              </ul>
-            </li>
-            <li>
-              Sartre rejects fixed human nature and any claim that everything is already decided.
-              <blockquote>
-                “... there is no human nature since there is no God to conceive of it.” (Sartre, 2007, p.23)
-              </blockquote>
-              <blockquote>
-                “... we will encounter no values or orders that can legitimize our conduct.” (Sartre, 2007, p.29)
-              </blockquote>
-            </li>
-          </ul>
-        </div>
-      </details>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <button
+                    class="px-4 py-2 rounded-full border hover:bg-blue-700 hover:text-white transition"
+                    @click="completeRandomIssue"
+                >
+                    Complete Random Issue
+                </button>
 
-      <!-- 4. Hope: Simultaneous Freedom and Anguish -->
-      <details class="accordion">
-        <summary>4. Hope: Simultaneous Freedom and Anguish</summary>
-        <div class="content">
-          <ul>
-            <li>Hope is both freedom and anguish.</li>
-            <li>
-              Hope can:
-              <ul>
-                <li>lock you into bad faith if you cling to a single desired outcome,</li>
-                <li>liberate you if it remains dynamic, open, and continual.</li>
-              </ul>
-            </li>
-            <li>
-              Hope is risk because it projects into a future that does not yet exist.
-              <blockquote>
-                “The being of consciousness is to exist by itself, then to make itself be and thereby to pass beyond itself.” (Sartre, 1956, p. 69)
-              </blockquote>
-              <blockquote>
-                “at man is, before all else, something-thatprojects itselfinto a future, and is conscious of doing so.” (Sartre, 2007,p. 23)
-              </blockquote>
-            </li>
-            <li>
-              We are always able to undo hopes, revise them, or abandon them. This possibility is part of what makes hope painful.
-              <blockquote>
-                “It is not a screen that separates us from action but a condition of action itself.” (Sartre, 2007, p.27)
-              </blockquote>
-            </li>
-            <li>No one and nothing requires us to hope for a “good life.”(Lenzi, 2025, p.161)</li>
-          </ul>
-        </div>
-      </details>
+                <button
+                    class="px-4 py-2 rounded-full border hover:bg-blue-700 hover:text-white transition"
+                    @click="addIssue"
+                >
+                    Add Upcoming Issue
+                </button>
 
-      <!-- 5. Nothingness and Becoming -->
-      <details class="accordion">
-        <summary>5. Nothingness and Becoming</summary>
-        <div class="content">
-          <ul>
-            <li>
-              Sartre: “Being for itself” is not completed, always in process.
-              <blockquote>
-                “On all sides I escape being and yet I am.” (Sartre, 1956, p. 61)
-              </blockquote>
-            </li>
-            <li>
-              Nothingness allows:
-              <ul>
-                <li>reinvention,</li>
-                <li>responsibility,</li>
-                <li>self destruction,</li>
-                <li>transformation.</li>
-              </ul>
-              <blockquote>
-                “Freedom is the human being putting his past out of play by secreting his own nothingness.” (Sartre, 1956, p. 28)
-              </blockquote>
-            </li>
-            <li>
-              Hope functions within nothingness:
-              <ul>
-                <li>Hope imagines a future self that does not yet exist.</li>
-                <li>
-                  Hope acknowledges that we are unfinished.
-                  <blockquote>
-                    “He will not be anything until later, and then he will be what he makes of himself.” (Sartre, 2007, p.22)
-                  </blockquote>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </details>
+                <button
+                    class="px-4 py-2 rounded-full border hover:bg-blue-700 hover:text-white transition"
+                    @click="resetDemo"
+                >
+                    Reset Demo
+                </button>
+            </div>
 
-      <!-- 6. Hope, Growth, and Self-Consciousness -->
-      <details class="accordion">
-        <summary>6. Hope, Growth, and Self-Consciousness</summary>
-        <div class="content">
-          <ul>
-            <li>
-              Growth is only possible if hope persists, because hope projects a self that is not yet real.
-              <blockquote>
-                “I apprehend myself simultaneously as totally responsible for my being and yet as totally unjustifiable.” (Sartre, 1956, p. 83)
-              </blockquote>
-            </li>
-            <li>
-              Example:
-              <ul>
-                <li>Hoping to be accepted as a speaker produces anguish while waiting,</li>
-                <li>but that hope makes learning, preparing, and growth possible,</li>
-                <li>even if the hope fails, it can give rise to new forms of hope.</li>
-              </ul>
-            </li>
-            <li>
-              We hope others see us positively, so we behave toward that projection.
-              <blockquote>
-                “... there is not a single one of our actions that does not create an image of man as we think he ought to be.” (Sartre, 2007, p.24)
-              </blockquote>
-            </li>
-            <li>When others view us poorly, shame can generate new hope to transform how we live and act.</li>
-          </ul>
-        </div>
-      </details>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="bg-slate-50 rounded-2xl p-5 border">
+                    <p>Velocity</p>
+                    <div class="text-4xl font-bold text-blue-700">{{ velocity }}</div>
+                    <small>points completed</small>
+                </div>
 
-      <!-- 7. Self-Destruction and Freedom -->
-      <details class="accordion">
-        <summary>7. Self-Destruction and Freedom</summary>
-        <div class="content">
-          <ul>
-            <li>
-              We are free even to engage in self destructive acts. (Sartre, 2007, p. 29)
-            </li>
-            <li>
-              Hope does not guarantee positive outcomes. It only frames how I move into possibility.
-            </li>
-            <li>
-              Hope requires action to realize its imagined futures, and I remain responsible for the actions and passions that follow. (Sartre, 2007, p. 29)
-            </li>
-          </ul>
-        </div>
-      </details>
+                <div class="bg-slate-50 rounded-2xl p-5 border">
+                    <p>Open Issues</p>
+                    <div class="text-4xl font-bold text-blue-700">{{ openIssues.length }}</div>
+                    <small>work still in progress</small>
+                </div>
 
-      <!-- 8. My Final Position -->
-      <details class="accordion">
-        <summary>8. My Final Position</summary>
-        <div class="content">
-          <ul>
-            <li>Sartre seems to accept anguish, avoid bad faith, and acknowledge complete freedom.</li>
-            <li>
-              My thoughts:
-              <ul>
-                <li>Hope is the antidote to bad faith.</li>
-                <li>To avoid becoming a static thing, one must maintain and renew hope.</li>
-                <li>
-                  Hope keeps the self open, dynamic, and capable of growth.
-                  <blockquote>
-                    Man is nothing other than his own project. (Sartre, 2007, p.10)
-                  </blockquote>
-                  <blockquote>
-                    “Freedom is the human being secreting his own nothingness.” (Sartre, 1956, p. 28)
-                  </blockquote>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <p>My thesis statement:</p>
-          <blockquote>
-            We are condemned to be free and, in that same way, condemned to hope.
-            Hope is not merely optimism but the ongoing refusal to be finished, fixed, or complete.
-          </blockquote>
-        </div>
-      </details>
+                <div class="bg-slate-50 rounded-2xl p-5 border">
+                    <p>Closed Issues</p>
+                    <div class="text-4xl font-bold text-blue-700">{{ closedIssues.length }}</div>
+                    <small>completed team work</small>
+                </div>
 
-      <!-- 9. Distilled Thoughts -->
-      <details class="accordion">
-        <summary>9. Distilled Thoughts</summary>
-        <div class="content">
-          <ul>
-            <li>We are condemned to be free.</li>
-            <li>We are condemned to be hopeful.</li>
-            <li>Hope is our ongoing negotiation with nothingness.</li>
-            <li>Hope keeps us from becoming a thing.</li>
-            <li>To hope is to accept anguish, possibility, and growth.</li>
-          </ul>
-        </div>
-      </details>
+                <div class="bg-slate-50 rounded-2xl p-5 border">
+                    <p>Milestone Progress</p>
+                    <div class="text-4xl font-bold text-blue-700">{{ progress }}%</div>
+                    <small>{{ mileStoneProgress }}</small>
+                </div>
+            </div>
 
-    <!-- 10. Works Cited -->
-    <details class="accordion">
-      <summary>10. Works Cited</summary>
-      <div class="content">
-        <p>The following sources were used to support this project:</p>
-        <ul>
-          <li>
-            Sartre, J. P. (2007). <em>Existentialism is a humanism</em> (C. Macomber, Trans.). Yale University Press. (Original work published 1946)
-          </li>
-          <li>
-            Sartre, J. P. (1956). <em>Being and nothingness: A phenomenological essay on ontology</em> (H. E. Barnes, Trans.). Philosophical Library. (Original work published 1943)
-          </li>
-          <li>
-            Lenzi, M. (2025). <em>Philosophy at the crossroads of the arts and sciences</em> (Revised ed.). Kendall Hunt Publishing Company.
-          </li>
-        </ul>
-      </div>
-    </details>
+            <h3 class="text-xl font-bold mt-6 mb-2">Milestone Progress</h3>
+            <div class="bg-slate-200 rounded-full overflow-hidden">
+                <div
+                    class="bg-orange-500 text-white text-right px-3 py-2 rounded-full transition-all duration-500"
+                    :style="{ width: progress + '%' }"
+                >
+                    {{ progress }}%
+                </div>
+            </div>
+        </section>
 
-    </section>
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-4">Expample User Interface</h2>
 
-    <footer>
-      <span>◆</span> Sartre, Freedom, Bad Faith, and Hope · Notes for study and reflection
+            <div class="flex flex-wrap gap-3 mb-4">
+                <button
+                    v-for="filter in filters"
+                    :key="filter"
+                    class="px-4 py-2 rounded-full border transition"
+                    :class="selectedFilter === filter ? 'bg-blue-700 text-white' : 'hover:bg-blue-700 hover:text-white'"
+                    @click="selectedFilter = filter"
+                >
+                    {{ filter }}
+                </button>
+            </div>
+
+            <div
+                v-for="issue in filteredIssues"
+                :key="issue.id"
+                class="border-l-4 border-blue-700 bg-slate-50 rounded-xl p-4 mb-3"
+            >
+                <strong>{{ issue.title }}</strong>
+                <p>{{ issue.description }}</p>
+                <small>
+                    {{ issue.status }} |
+                    {{ issue.weight }} points |
+                    {{ issue.assignee }}
+                </small>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-4">Technology Options</h2>
+            <p class="mb-4">
+                The final stack would be chosen by the team. I am open to the front end and back end
+                choices, but I would like us to use modern frameworks so everyone gets experience
+                building a realistic full-stack application.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="font-bold block mb-2">Front end framework</label>
+                    <select class="border rounded-xl px-4 py-3 w-full" v-model="selectedFrontendName">
+                        <option v-for="frontend in frontends" :key="frontend.name">
+                            {{ frontend.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-bold block mb-2">Back end framework</label>
+                    <select class="border rounded-xl px-4 py-3 w-full" v-model="selectedBackendName">
+                        <option v-for="backend in backends" :key="backend.name">
+                            {{ backend.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5">
+                <h3 class="font-bold text-lg">
+                    {{ selectedFrontend.name }} + {{ selectedBackend.name }}
+                </h3>
+
+                <p class="mb-2"><strong>Front end:</strong> {{ selectedFrontend.description }}</p>
+                <p class="mb-2"><strong>Back end:</strong> {{ selectedBackend.description }}</p>
+                <p><strong>Why two Frameworks:</strong> {{ selectedStackSummary }}</p>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-4">Why this is a good team project</h2>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="bg-orange-50 border border-orange-200 rounded-2xl p-5">
+                    Learn how APIs work
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-2xl p-5">
+                    Practice frontend design
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-2xl p-5">
+                    Build backend features
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-2xl p-5">
+                    Make something useful
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-3">Semester Scope</h2>
+            <ol class="list-decimal ml-6 space-y-2">
+                <li>Connect to GitLab and retrieve project issue data</li>
+                <li>Display open, closed, and upcoming issues</li>
+                <li>Calculate team velocity from completed issue weights</li>
+                <li>Show milestone progress in a clean dashboard</li>
+                <li>Add stretch features if the core version is finished early</li>
+            </ol>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow p-6">
+            <h2 class="text-2xl font-bold mb-3">Stretch Features</h2>
+            <ul class="list-disc ml-6 space-y-2">
+                <li>Overdue issue warnings</li>
+                <li>Workload by team member</li>
+                <li>Exportable sprint report</li>
+                <li>Multiple project support</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="text-center text-slate-500 py-8">
+        <span>This was built with Vue 3 CDN and Tailwind CSS CDN using dummy data over 3 evenings.</span><br>
+        <span>Imagine what a team can do with two eight weeks!</span>
     </footer>
-  </main>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    const { createApp } = Vue;
+
+    const startingIssues = [
+        {
+            id: 1,
+            title: "Connect to GitLab API",
+            description: "Ask GitLab for issue, milestone, user, and label data.",
+            status: "Closed",
+            weight: 8,
+            assignee: "Backend Developer",
+        },
+        {
+            id: 2,
+            title: "Calculate Team Velocity",
+            description: "Add up the completed issue points for a milestone.",
+            status: "Open",
+            weight: 13,
+            assignee: "Full Stack Developer",
+        },
+        {
+            id: 3,
+            title: "Build Dashboard UI",
+            description: "Create a clean page where the team can understand project progress.",
+            status: "Open",
+            weight: 8,
+            assignee: "Frontend Developer",
+        },
+        {
+            id: 4,
+            title: "Milestone Progress Bar",
+            description: "Show how close the team is to finishing the current milestone.",
+            status: "Closed",
+            weight: 5,
+            assignee: "Frontend Developer",
+        },
+        {
+            id: 5,
+            title: "Workload Summary",
+            description: "Show how work is distributed across team members.",
+            status: "Upcoming",
+            weight: 8,
+            assignee: "Team",
+        },
+    ];
+
+    createApp({
+        data() {
+            return {
+                projectTitle: "GitLab Team Dashboard",
+                tagline: "A beginner-friendly full-stack project that uses GitLab project data",
+                demoMode: false,
+                selectedFilter: "All",
+                selectedFrontendName: "Vue",
+                selectedBackendName: "Java Spring Boot",
+                nextIssueId: 6,
+                issues: structuredClone(startingIssues),
+                filters: ["All", "Open", "Closed", "Upcoming"],
+                frontends: [
+                    {
+                        name: "Vue",
+                        description: "Vue is a fantastic JavaScript framework used to build interactive web pages. This pitch page was built with Vue using the CDN. (My personal preference is Vue because I use it regularly and really enjoy the developer experience.)",
+                    },
+                    {
+                        name: "SvelteKit",
+                        description: "SvelteKit is a JavaScript and TypeScript framework for building fast web applications.",
+                    },
+                    {
+                        name: "React",
+                        description: "React is a JavaScript library for building user interfaces. It is widely used and has a large ecosystem.",
+                    },
+                ],
+                backends: [
+                    {
+                        name: "Java Spring Boot",
+                        description: "Spring Boot is a Java framework used to build web servers, APIs, and backend services.",
+                    },
+                    {
+                        name: "Kotlin with Spring Boot or Ktor",
+                        description: "Kotlin is a modern programming language that feels similar to Java but with less boilerplate. It used for Android developemnt but can be used for backend development with frameworks like Spring Boot or Ktor.",
+                    },
+                    {
+                        name: "Laravel",
+                        description: "Laravel is a PHP framework used to build web applications, APIs, routing, database access, and authentication.",
+                    },
+                    {
+                        name: ".NET",
+                        description: ".NET is a Microsoft development platform. The backend would be written in C# using ASP.NET Core.",
+                    },
+                ],
+            };
+        },
+
+        computed: {
+            selectedFrontend() {
+                return this.frontends.find((frontend) => frontend.name === this.selectedFrontendName);
+            },
+
+            selectedBackend() {
+                return this.backends.find((backend) => backend.name === this.selectedBackendName);
+            },
+
+            selectedStackSummary() {
+                return "This gives the team practice with a modern user interface, a backend API, and the kind of full-stack development used in real projects.";
+            },
+
+            filteredIssues() {
+                if (this.selectedFilter === "All") {
+                    return this.issues;
+                }
+
+                return this.issues.filter((issue) => issue.status === this.selectedFilter);
+            },
+
+            openIssues() {
+                return this.issues.filter((issue) => issue.status === "Open");
+            },
+
+            closedIssues() {
+                return this.issues.filter((issue) => issue.status === "Closed");
+            },
+
+            velocity() {
+                return this.closedIssues.reduce((total, issue) => total + issue.weight, 0);
+            },
+
+            progress() {
+                return Math.round((this.closedIssues.length / this.issues.length) * 100);
+            },
+
+            mileStoneProgress() {
+                if (this.progress >= 80) {
+                    return "Strong progress";
+                }
+
+                if (this.progress >= 50) {
+                    return "steady progress";
+                }
+
+                return "limited progress";
+            },
+        },
+
+        methods: {
+            completeRandomIssue() {
+                const openIssue = this.issues.find((issue) => issue.status !== "Closed");
+
+                if (openIssue) {
+                    openIssue.status = "Closed";
+                }
+            },
+
+            addIssue() {
+                this.issues.push({
+                    id: this.nextIssueId,
+                    title: "New Dashboard Idea " + this.nextIssueId,
+                    description: "A possible feature the team could choose to build.",
+                    status: "Upcoming",
+                    weight: 5,
+                    assignee: "Team",
+                });
+
+                this.nextIssueId++;
+            },
+
+            resetDemo() {
+                this.issues = structuredClone(startingIssues);
+                this.nextIssueId = 6;
+                this.selectedFilter = "All";
+            },
+        },
+
+        mounted() {
+            setInterval(() => {
+                if (!this.demoMode) {
+                    return;
+                }
+
+                Math.random() > 0.5 ? this.completeRandomIssue() : this.addIssue();
+            }, 1800);
+        },
+    }).mount("#app");
+</script>
 </body>
 </html>
